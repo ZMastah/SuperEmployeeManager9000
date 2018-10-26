@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,8 +9,10 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using SuperEmployeeManager9000.Models;
 
-namespace WebApplication1
+namespace SuperEmployeeManager9000
 {
     public class Startup
     {
@@ -27,12 +29,15 @@ namespace WebApplication1
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+                //options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<SuperEmployeeManager9000Context>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("SuperEmployeeManager9000Context")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
