@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{Year?}"
 @model SuperEmployeeManager9000.Pages.Employees.EmployeesModel
 @{
     ViewData["Title"] = "Salary Review";
@@ -16,34 +16,76 @@
             Model.EmployeeCount++;
             Model.TotalSalary += item.Salary;
         }
-        Model.AverageSalary = Model.TotalSalary / Model.EmployeeCount;
-        WriteLiteral(Model.AverageSalary);
+        if (Model.EmployeeCount > 0)
+        {
+            Model.AverageSalary = Model.TotalSalary / Model.EmployeeCount;
+            WriteLiteral(Model.AverageSalary);
+        }
+        else
+        {
+            WriteLiteral("0 (No salaries in system)");
+        }
     }
 </p>
-<b><p>!Functionality under this is not finished yet!</p></b>
 <hr />
 
 
 @* Yearly average salary section. *@
 <div class="row">
     <div class="col-md-4">
-        <h4><u>Yearly average salaries</u></h4>
-        <h4>2018</h4>
-        January: xxxx<br />
-        February: xxxx<br />
-        March: xxxx<br />
-        April: xxxx<br />
-        May: xxxx<br />
-        June: xxxx<br />
-        July: xxxx<br />
-        August: xxxx<br />
-        September: xxxx<br />
-        October: xxxx<br />
-        November: xxxx<br />
-        December: xxxx<br />
+        <h4>Average salaries in year: @{WriteLiteral(Model.CurrentlyInspectedYear.ToString()); }</h4>
 
-        <a href="#">Go to current year.</a><br />
-        <a href="#">Go to last year.</a><br />
-        <a href="#">Go to next year.</a>
+
+        @* Iterating through employees' salaries when they were hired and calculating monthly averages. *@
+        @{
+            for (int i = 0; i < 12; i++)
+            {
+                foreach (var item in Model.Employee)
+                {
+                    if (item.DateHired.Year > Model.CurrentlyInspectedYear) { continue; }
+
+                    if (item.DateHired.Year == Model.CurrentlyInspectedYear && item.DateHired.Month > i + 1) { continue; }
+
+                    Model.MonthlyTotalSalaries[i] += item.Salary;
+                    Model.AmountOfPeopleContributingToSalary[i]++;
+                }
+
+                if (Model.AmountOfPeopleContributingToSalary[i] > 0)
+                {
+                    Model.MonthlyAverageSalaries[i] = Model.MonthlyTotalSalaries[i] / Model.AmountOfPeopleContributingToSalary[i];
+                }
+                else
+                {
+                    Model.MonthlyAverageSalaries[i] = 0;
+                }
+            }
+        }
+
+        <p>
+            January: @{WriteLiteral(Model.MonthlyAverageSalaries[0]); }<br />
+            February: @{WriteLiteral(Model.MonthlyAverageSalaries[1]); }<br />
+            March: @{WriteLiteral(Model.MonthlyAverageSalaries[2]); }<br />
+            April: @{WriteLiteral(Model.MonthlyAverageSalaries[3]); }<br />
+            May: @{WriteLiteral(Model.MonthlyAverageSalaries[4]); }<br />
+            June: @{WriteLiteral(Model.MonthlyAverageSalaries[5]); }<br />
+            July: @{WriteLiteral(Model.MonthlyAverageSalaries[6]); }<br />
+            August: @{WriteLiteral(Model.MonthlyAverageSalaries[7]); }<br />
+            September: @{WriteLiteral(Model.MonthlyAverageSalaries[8]); }<br />
+            October: @{WriteLiteral(Model.MonthlyAverageSalaries[9]); }<br />
+            November: @{WriteLiteral(Model.MonthlyAverageSalaries[10]); }<br />
+            December: @{WriteLiteral(Model.MonthlyAverageSalaries[11]); }<br />
+        </p>
+
+        <p>
+            <a href="/Index?Year=@{WriteLiteral(DateTime.Now.Year);}">Go to current year.</a><br />
+            <a href="/Index?Year=@{
+                Model.CurrentlyInspectedYear--;
+                WriteLiteral(Model.CurrentlyInspectedYear);
+                }">Go to last year.</a><br />
+            <a href="/Index?Year=@{
+                Model.CurrentlyInspectedYear+=2;
+                WriteLiteral(Model.CurrentlyInspectedYear);
+                }">Go to next year.</a>
+        </p>
     </div>
 </div>

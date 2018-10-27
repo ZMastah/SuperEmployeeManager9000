@@ -14,6 +14,11 @@ namespace SuperEmployeeManager9000.Pages.Employees
         public int TotalSalary { get; set; }
         public int AverageSalary { get; set; }
 
+        public int[] MonthlyTotalSalaries { get; set; } = new int[12];
+        public int[] AmountOfPeopleContributingToSalary { get; set; } = new int[12];
+        public int[] MonthlyAverageSalaries { get; set; } = new int[12];
+        public int CurrentlyInspectedYear { get; set; } = DateTime.Now.Year;
+
         private readonly SuperEmployeeManager9000Context _context;
 
         public EmployeesModel(SuperEmployeeManager9000Context context)
@@ -23,8 +28,13 @@ namespace SuperEmployeeManager9000.Pages.Employees
 
         public IList<Employee> Employee { get;set; }
 
-        public async Task OnGetAsync(string searchString)
+        public async Task OnGetAsync(string searchString, int year)
         {
+            if (year > 1900)
+            {
+                CurrentlyInspectedYear = year;
+            }
+
             var employees = from e in _context.Employee select e;
 
             if (!String.IsNullOrEmpty(searchString))
