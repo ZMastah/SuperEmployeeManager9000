@@ -11,9 +11,9 @@ namespace SuperEmployeeManager9000.Pages.Employees
 {
     public class DeleteModel : PageModel
     {
-        private readonly SuperEmployeeManager9000.Models.SuperEmployeeManager9000Context _context;
+        private readonly SuperEmployeeManager9000Context _context;
 
-        public DeleteModel(SuperEmployeeManager9000.Models.SuperEmployeeManager9000Context context)
+        public DeleteModel(SuperEmployeeManager9000Context context)
         {
             _context = context;
         }
@@ -52,7 +52,7 @@ namespace SuperEmployeeManager9000.Pages.Employees
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Employees");
         }
     }
 }

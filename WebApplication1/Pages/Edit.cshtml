@@ -2,13 +2,12 @@
 @model SuperEmployeeManager9000.Pages.Employees.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Employee";
 }
 
-<h2>Edit</h2>
-
-<h4>Employee</h4>
+<h4>Edit chosen employee.</h4>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <form method="post">
@@ -47,7 +46,7 @@
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="/Employees">Back to the list of employees.</a>
 </div>
 
 @section Scripts {

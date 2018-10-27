@@ -2,7 +2,7 @@
 @model SuperEmployeeManager9000.Pages.Employees.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Employee Details";
 }
 
 <h4>Single Employee Data</h4>
@@ -42,7 +42,8 @@
         </dd>
     </dl>
 </div>
+
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Employee.ID">Edit</a> |
-    <a asp-page="/Employees">Back to List</a>
+    <a asp-page="/Edit" asp-route-id="@Model.Employee.ID">Edit</a> |
+    <a asp-page="/Employees">Back to the list of employees.</a>
 </div>

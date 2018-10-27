@@ -2,20 +2,20 @@
 @model SuperEmployeeManager9000.Pages.Employees.EmployeesModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Employee List";
 }
 
-<h4>Employee Overview</h4>
+<h4>List of employees in the system.</h4>
 <p>
     <a asp-page="Create">Insert new employee to the system.</a>
 </p>
-
+<hr />
 
 @* Employee search form. *@
 <form>
     <p>
-        Name: <input type="text" name="SearchString">
-        <input type="submit" value="Filter" />
+        Filter results by name: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" class="btn btn-default" />
     </p>
 </form>
 
@@ -62,9 +62,9 @@
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                    <a asp-page="/Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="/Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="/Delete" asp-route-id="@item.ID">Delete</a>
                 </td>
             </tr>
         }

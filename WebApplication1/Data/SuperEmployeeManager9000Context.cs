@@ -13,6 +13,6 @@ namespace SuperEmployeeManager9000.Models
         {
         }
 
-        public DbSet<SuperEmployeeManager9000.Models.Employee> Employee { get; set; }
+        public DbSet<Employee> Employee { get; set; }
     }
 }

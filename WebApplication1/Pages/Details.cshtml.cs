@@ -11,9 +11,9 @@ namespace SuperEmployeeManager9000.Pages.Employees
 {
     public class DetailsModel : PageModel
     {
-        private readonly SuperEmployeeManager9000.Models.SuperEmployeeManager9000Context _context;
+        private readonly SuperEmployeeManager9000Context _context;
 
-        public DetailsModel(SuperEmployeeManager9000.Models.SuperEmployeeManager9000Context context)
+        public DetailsModel(SuperEmployeeManager9000Context context)
         {
             _context = context;
         }

@@ -12,9 +12,9 @@ namespace SuperEmployeeManager9000.Pages.Employees
 {
     public class EditModel : PageModel
     {
-        private readonly SuperEmployeeManager9000.Models.SuperEmployeeManager9000Context _context;
+        private readonly SuperEmployeeManager9000Context _context;
 
-        public EditModel(SuperEmployeeManager9000.Models.SuperEmployeeManager9000Context context)
+        public EditModel(SuperEmployeeManager9000Context context)
         {
             _context = context;
         }
@@ -63,7 +63,7 @@ namespace SuperEmployeeManager9000.Pages.Employees
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Employees");
         }
 
         private bool EmployeeExists(int id)

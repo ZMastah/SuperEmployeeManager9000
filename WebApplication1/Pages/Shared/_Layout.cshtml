@@ -16,6 +16,9 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
+
+
+@* Beginning of body and navigation bar. *@
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -30,7 +33,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/Employees">Employee List</a></li>
+                    <li><a href="/Index">Salary review</a></li>
+                    <li><a href="/Employees">List of employees</a></li>
+                    <li><a href="/Create">Add a new employee</a></li>
                 </ul>
             </div>
         </div>
@@ -38,10 +43,13 @@
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
+
+    @* Page content container. *@
+    <div class="container body-content" style="padding-top: 20px;">
         @RenderBody()
         <hr />
     </div>
+
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

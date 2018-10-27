@@ -11,9 +11,9 @@ namespace SuperEmployeeManager9000.Pages.Employees
 {
     public class CreateModel : PageModel
     {
-        private readonly SuperEmployeeManager9000.Models.SuperEmployeeManager9000Context _context;
+        private readonly SuperEmployeeManager9000Context _context;
 
-        public CreateModel(SuperEmployeeManager9000.Models.SuperEmployeeManager9000Context context)
+        public CreateModel(SuperEmployeeManager9000Context context)
         {
             _context = context;
         }
@@ -36,7 +36,7 @@ namespace SuperEmployeeManager9000.Pages.Employees
             _context.Employee.Add(Employee);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Employees");
         }
     }
 }
