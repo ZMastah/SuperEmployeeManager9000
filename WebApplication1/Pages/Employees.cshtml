@@ -13,17 +13,21 @@
 
 
 @* Employee search form. *@
-    <form>
-        <div class="col-sm-4">
-            <input type="text" id="searchbox" class="form-control" name="SearchString" placeholder="Enter (part of) a name to search with">
-        </div>
-        <div class="col-sm-2">
-            <input type="submit" value="Filter" class="btn btn-default" />
-        </div>
-    </form>
-    <div class="col-sm-2">
-        <input type="button" onclick="printDiv('printableArea')" value="Print employee list" class="btn btn-default" />
+<form>
+    <div class="col-sm-4">
+        <input type="text" id="searchbox" class="form-control" name="SearchString" placeholder="Enter (part of) a name to search with">
     </div>
+    <div class="col-sm-2">
+        <input type="submit" value="Filter" class="btn btn-default" />
+    </div>
+</form>
+<div class="col-sm-2">
+    <input type="button" onclick="printDiv('printableArea')" value="Print employee list" class="btn btn-default" />
+</div>
+<div class="col-sm-2">
+    <iframe id="txtArea1" style="display:none"></iframe>
+    <input type="button" value="Export employee list" id="btnExport" onclick="exportTableToCSV('employees.csv')" class="btn btn-default" />
+</div>
 <br /><br /><hr />
 
 
@@ -53,7 +57,7 @@
         <tbody>
             @foreach (var item in Model.Employee)
             {
-                 <tr>
+                <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>

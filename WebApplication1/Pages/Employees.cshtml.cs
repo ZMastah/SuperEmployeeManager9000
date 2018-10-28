@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using SuperEmployeeManager9000.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using SuperEmployeeManager9000.Models;
 
 namespace SuperEmployeeManager9000.Pages.Employees
 {
@@ -26,7 +26,7 @@ namespace SuperEmployeeManager9000.Pages.Employees
             _context = context;
         }
 
-        public IList<Employee> Employee { get;set; }
+        public IList<Employee> Employee { get; set; }
 
         public async Task OnGetAsync(string searchString, int year)
         {
