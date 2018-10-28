@@ -7,6 +7,8 @@ namespace SuperEmployeeManager9000.Models
     public class Employee
     {
         public int ID { get; set; }
+
+        [Required]
         public string Name { get; set; }
         public int Salary { get; set; }
 
@@ -17,6 +19,7 @@ namespace SuperEmployeeManager9000.Models
         [Display(Name = "Phone Number")]
         public int PhoneNumber { get; set; }
 
+        [Required]
         [Display(Name = "Email Address")]
         public string Email { get; set; }
     }

@@ -11,62 +11,71 @@
 </p>
 <hr />
 
+
 @* Employee search form. *@
-<form>
-    <p>
-        Filter results by name: <input type="text" name="SearchString">
-        <input type="submit" value="Filter" class="btn btn-default" />
-    </p>
-</form>
+    <form>
+        <div class="col-sm-4">
+            <input type="text" id="searchbox" class="form-control" name="SearchString" placeholder="Enter (part of) a name to search with">
+        </div>
+        <div class="col-sm-2">
+            <input type="submit" value="Filter" class="btn btn-default" />
+        </div>
+    </form>
+    <div class="col-sm-2">
+        <input type="button" onclick="printDiv('printableArea')" value="Print employee list" class="btn btn-default" />
+    </div>
+<br /><br /><hr />
 
 
 @* Table of employees. *@
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee[0].Salary)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee[0].DateHired)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee[0].PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee[0].Email)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Employee)
-        {
+<div id="printableArea">
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Salary)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateHired)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    <a asp-page="/Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-page="/Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-page="/Delete" asp-route-id="@item.ID">Delete</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employee[0].Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employee[0].Salary)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employee[0].DateHired) (dd/mm/yyyy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employee[0].PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employee[0].Email)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Employee)
+            {
+                 <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Salary)
+                    </td>
+                    <td>
+                        @{WriteLiteral(String.Format("{0:dd/MM/yyyy}", item.DateHired));}
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td class="no-print">
+                        <a asp-page="/Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a asp-page="/Details" asp-route-id="@item.ID">Details</a> |
+                        <a asp-page="/Delete" asp-route-id="@item.ID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

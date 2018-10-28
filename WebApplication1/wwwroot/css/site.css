@@ -10,6 +10,7 @@ body {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    padding-top: 20px;
 }
 
 /* Carousel */
@@ -33,5 +34,17 @@ body {
     /* Hide captions */
     .carousel-caption {
         display: none;
+    }
+}
+
+/* Add little padding to top. */
+.addPaddingTop {
+    padding-top: 20px;
+}
+
+/* Hide content on print view */
+@media print {
+    .no-print, .no-print * {
+        display: none !important;
     }
 }
