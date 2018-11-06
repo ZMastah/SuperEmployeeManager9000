@@ -10,5 +10,6 @@ namespace SuperEmployeeManager9000.Models
         }
 
         public DbSet<Employee> Employee { get; set; }
+        public DbSet<SalaryHistory> SalaryHistory { get; set; }
     }
 }

@@ -23,27 +23,87 @@
             @Html.DisplayFor(model => model.Employee.Salary)
         </dd>
         <dt>
-            Date Hired
+            Date hired
         </dt>
         <dd>
             @{WriteLiteral(String.Format("{0:dd/MM/yyyy}", Model.Employee.DateHired));}
         </dd>
         <dt>
-            Phone Number
+            Phone number
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Employee.PhoneNumber)
         </dd>
         <dt>
-            Email Address
+            Email address
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Employee.Email)
         </dd>
+        <dt>
+            Currently hired
+        </dt>
+        <dd>
+            @{
+                if (Model.Employee.IsCurrentlyHired)
+                {
+                    WriteLiteral("Yes");
+                }
+                else
+                {
+                    WriteLiteral("No");
+                }
+            }
+        </dd>
     </dl>
+    <hr />
+
+    <h5><u>Salary history</u></h5>
+    @{ if (Model.SalaryHistory.Any())
+        {
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.SalaryHistory[0].SalaryForThePeriod)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SalaryHistory[0].SalaryPeriodBegan) (dd/mm/yyyy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SalaryHistory[0].SalaryPeriodEnded) (dd/mm/yyyy)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.SalaryHistory)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SalaryForThePeriod)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SalaryPeriodBegan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SalaryPeriodEnded)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+        }
+        else
+        {
+            <p>There is no salary history for this employee.</p>
+        }
+        }
+    <hr />
 </div>
 
 <div>
-    <a asp-page="/Edit" asp-route-id="@Model.Employee.ID">Edit</a> |
+    <a asp-page="/EditInfo" asp-route-id="@Model.Employee.ID">Edit Information</a> |
+    <a asp-page="/EditSalary" asp-route-id="@Model.Employee.ID">Edit Salary</a> |
     <a asp-page="/Employees">Back to the list of employees.</a>
 </div>

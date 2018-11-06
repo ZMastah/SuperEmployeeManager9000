@@ -37,14 +37,19 @@ body {
     }
 }
 
-/* Add little padding to top. */
+/* Add padding to top. */
 .addPaddingTop {
     padding-top: 20px;
+}
+
+/* Add little padding to top. */
+.addSmallPaddingTop {
+    padding-top: 15px;
 }
 
 /* Hide content on print view */
 @media print {
     .no-print, .no-print * {
-        display: none !important;
+        display: none;
     }
 }

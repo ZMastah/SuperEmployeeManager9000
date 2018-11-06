@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using SuperEmployeeManager9000.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SuperEmployeeManager9000.Pages.Employees
@@ -16,8 +19,9 @@ namespace SuperEmployeeManager9000.Pages.Employees
         }
 
         public Employee Employee { get; set; }
+        public List<SalaryHistory> SalaryHistory { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id, CancellationToken cancellationToken)
         {
             if (id == null)
             {
@@ -25,6 +29,7 @@ namespace SuperEmployeeManager9000.Pages.Employees
             }
 
             Employee = await _context.Employee.FirstOrDefaultAsync(m => m.ID == id);
+            SalaryHistory = await _context.SalaryHistory.Where(e => e.EmployeeID == id).ToListAsync();
 
             if (Employee == null)
             {

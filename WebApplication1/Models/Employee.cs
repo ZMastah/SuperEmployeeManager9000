@@ -21,5 +21,8 @@ namespace SuperEmployeeManager9000.Models
         [Required]
         [Display(Name = "Email Address")]
         public string Email { get; set; }
+
+        [Display(Name = "Currently Employed")]
+        public bool IsCurrentlyHired { get; set; }
     }
 }
