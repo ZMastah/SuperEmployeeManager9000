@@ -6,9 +6,9 @@
 }
 
 <h4>Single Employee Data</h4>
+<hr />
 
 <div>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Employee.Name)
@@ -67,6 +67,7 @@
     </dl>
     <hr />
 
+    @* Salary history for current employee. *@
     <h5><u>Salary history</u></h5>
     @{ if (Model.SalaryHistory.Any())
         {
@@ -91,34 +92,37 @@
         <tbody>
             @foreach (var item in Model.SalaryHistory)
             {
-                <tr>
-                    <td>
-                        @{ 
-                            if (Model.LastSalaryReference == 0)
-                            {
-                                WriteLiteral("Hired");
-                            }
-                            else if (item.SalaryForThePeriod > Model.LastSalaryReference)
-                            {
-                        <span style="color:#040"> @{WriteLiteral("Promoted");}</span>
-                            }
-                            else
-                            {
-                        <span style="color:#400"> @{WriteLiteral("Demoted");}</span>
-                            }
-                            Model.LastSalaryReference = item.SalaryForThePeriod;
+            <tr>
+                <td>
+                    @{
+                        if (Model.LastSalaryReference == 0)
+                        {
+                            WriteLiteral("Hired");
                         }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SalaryForThePeriod)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SalaryPeriodBegan)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SalaryPeriodEnded)
-                    </td>
-                </tr>
+                        else if (item.SalaryForThePeriod > Model.LastSalaryReference)
+                        {
+                            <span style="color:#040"> @{WriteLiteral("Promoted");}</span>
+                        }
+                        else
+                        {
+                            <span style="color:#400"> @{WriteLiteral("Demoted");}</span>
+                        }
+                        Model.LastSalaryReference = item.SalaryForThePeriod;
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalaryForThePeriod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalaryPeriodBegan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalaryPeriodEnded)
+                </td>
+                <td class="no-print">
+                    <a asp-page="/DeleteSalaryPeriod" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
@@ -134,5 +138,6 @@
 <div>
     <a asp-page="/EditInfo" asp-route-id="@Model.Employee.ID">Edit Information</a> |
     <a asp-page="/EditSalary" asp-route-id="@Model.Employee.ID">Edit Salary</a> |
+    <a asp-page="/Deactivate" asp-route-id="@Model.Employee.ID">Deactivate</a> |
     <a asp-page="/Employees">Back to the list of employees.</a>
 </div>

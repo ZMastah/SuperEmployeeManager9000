@@ -28,7 +28,7 @@ namespace SuperEmployeeManager9000.Pages.Employees
             {
                 return Page();
             }
-
+            Employee.IsCurrentlyHired = true;
             _context.Employee.Add(Employee);
             await _context.SaveChangesAsync();
 
