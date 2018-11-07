@@ -9,14 +9,15 @@ namespace SuperEmployeeManager9000.Models
 
         public int EmployeeID { get; set; }
 
-        [Display(Name = "Salary Period Began")]
+        [Display(Name = "Salary period began")]
         [DataType(DataType.Date)]
         public DateTime SalaryPeriodBegan { get; set; }
 
-        [Display(Name = "Salary Period Ended")]
+        [Display(Name = "Salary period ended")]
         [DataType(DataType.Date)]
         public DateTime SalaryPeriodEnded { get; set; }
 
+        [Display(Name = "Salary for the period")]
         public int SalaryForThePeriod { get; set; }
     }
 }

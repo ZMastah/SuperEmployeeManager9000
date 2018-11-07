@@ -20,7 +20,16 @@
             @Html.DisplayNameFor(model => model.Employee.Salary)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Employee.Salary)
+            @{
+                if (Model.Employee.IsCurrentlyHired)
+                {
+                    @Html.DisplayFor(model => model.Employee.Salary)
+                }
+                else
+                {
+                    WriteLiteral("No current salary.");
+                }
+            }
         </dd>
         <dt>
             Date hired
@@ -65,6 +74,9 @@
         <thead>
             <tr>
                 <th>
+                    Period event
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.SalaryHistory[0].SalaryForThePeriod)
                 </th>
                 <th>
@@ -80,6 +92,23 @@
             @foreach (var item in Model.SalaryHistory)
             {
                 <tr>
+                    <td>
+                        @{ 
+                            if (Model.LastSalaryReference == 0)
+                            {
+                                WriteLiteral("Hired");
+                            }
+                            else if (item.SalaryForThePeriod > Model.LastSalaryReference)
+                            {
+                        <span style="color:#040"> @{WriteLiteral("Promoted");}</span>
+                            }
+                            else
+                            {
+                        <span style="color:#400"> @{WriteLiteral("Demoted");}</span>
+                            }
+                            Model.LastSalaryReference = item.SalaryForThePeriod;
+                        }
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.SalaryForThePeriod)
                     </td>

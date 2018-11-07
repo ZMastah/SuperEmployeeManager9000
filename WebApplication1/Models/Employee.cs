@@ -11,18 +11,18 @@ namespace SuperEmployeeManager9000.Models
         public string Name { get; set; }
         public int Salary { get; set; }
 
-        [Display(Name = "Date Hired")]
+        [Display(Name = "Date hired")]
         [DataType(DataType.Date)]
         public DateTime DateHired { get; set; }
 
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Phone number")]
         public int PhoneNumber { get; set; }
 
         [Required]
-        [Display(Name = "Email Address")]
+        [Display(Name = "Email address")]
         public string Email { get; set; }
 
-        [Display(Name = "Currently Employed")]
+        [Display(Name = "Currently employed")]
         public bool IsCurrentlyHired { get; set; }
     }
 }

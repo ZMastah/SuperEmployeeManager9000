@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +20,7 @@ namespace SuperEmployeeManager9000.Pages
         [BindProperty]
         public Employee Employee { get; set; }
         
-        public SalaryHistory SalaryHistory { get; set; }
+        public SalaryHistory LastSalaryHistory { get; set; }
         public SalaryHistory NewSalaryHistory { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -31,7 +30,8 @@ namespace SuperEmployeeManager9000.Pages
                 return NotFound();
             }
 
-            Employee = await _context.Employee.FirstOrDefaultAsync(m => m.ID == id);
+            Employee = await _context.Employee.FirstOrDefaultAsync(e => e.ID == id);
+            LastSalaryHistory = await _context.SalaryHistory.OrderByDescending(s => s.ID).FirstOrDefaultAsync(s => s.EmployeeID == id);
 
             if (Employee == null)
             {
@@ -45,6 +45,12 @@ namespace SuperEmployeeManager9000.Pages
             if (!ModelState.IsValid)
             {
                 return Page();
+            }
+
+            if(LastSalaryHistory != null)
+            {
+                LastSalaryHistory.SalaryPeriodEnded = Employee.DateHired;
+                _context.Attach(LastSalaryHistory).State = EntityState.Modified;
             }
 
             NewSalaryHistory = new SalaryHistory

@@ -45,7 +45,8 @@ namespace SuperEmployeeManager9000.Pages.Employees
 
             if (Employee != null)
             {
-                _context.Employee.Remove(Employee);
+                Employee.IsCurrentlyHired = false;
+                Employee.Salary = 0;
                 await _context.SaveChangesAsync();
             }
 
