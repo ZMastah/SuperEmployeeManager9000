@@ -101,11 +101,11 @@
                         }
                         else if (item.SalaryForThePeriod > Model.LastSalaryReference)
                         {
-                            <span style="color:#040"> @{WriteLiteral("Promoted");}</span>
+                            <span style="color:#090"> @{WriteLiteral("Promoted");}</span>
                         }
                         else
                         {
-                            <span style="color:#400"> @{WriteLiteral("Demoted");}</span>
+                            <span style="color:#900"> @{WriteLiteral("Demoted");}</span>
                         }
                         Model.LastSalaryReference = item.SalaryForThePeriod;
                     }
@@ -120,6 +120,7 @@
                     @Html.DisplayFor(modelItem => item.SalaryPeriodEnded)
                 </td>
                 <td class="no-print">
+                    <a asp-page="/EditSalaryPeriod" asp-route-id="@item.ID">Edit</a> |
                     <a asp-page="/DeleteSalaryPeriod" asp-route-id="@item.ID">Delete</a>
                 </td>
             </tr>

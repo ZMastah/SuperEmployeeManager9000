@@ -29,8 +29,9 @@ namespace SuperEmployeeManager9000.Pages.Employees
                 return NotFound();
             }
 
-            Employee = await _context.Employee.FirstOrDefaultAsync(m => m.ID == id);
-            SalaryHistory = await _context.SalaryHistory.Where(e => e.EmployeeID == id).ToListAsync();
+            Employee = await _context.Employee.FirstOrDefaultAsync(e => e.ID == id);
+            SalaryHistory = await _context.SalaryHistory.Where(s => s.EmployeeID == id).ToListAsync();
+
             if (Employee.IsCurrentlyHired && SalaryHistory.Count > 0)
             {
                 SalaryHistory.RemoveAt(SalaryHistory.Count - 1);

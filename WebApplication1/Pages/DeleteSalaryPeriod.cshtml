@@ -12,10 +12,10 @@
 <div>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.SalaryHistory.EmployeeID)
+            Name of employee
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.SalaryHistory.EmployeeID)
+            @{ WriteLiteral(Model.Employee.Name); }
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.SalaryHistory.SalaryPeriodBegan)
@@ -40,6 +40,6 @@
     <form method="post">
         <input type="hidden" asp-for="SalaryHistory.ID" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-page="./Index">Back to List</a>
+        <a asp-page="/Employees">Back to the list of employees.</a>
     </form>
 </div>

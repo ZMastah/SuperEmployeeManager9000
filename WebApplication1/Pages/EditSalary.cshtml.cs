@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using SuperEmployeeManager9000.Models;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SuperEmployeeManager9000.Pages
 {
@@ -19,9 +19,10 @@ namespace SuperEmployeeManager9000.Pages
 
         [BindProperty]
         public Employee Employee { get; set; }
-        
-        public SalaryHistory LastSalaryHistory { get; set; }
+
+        //public SalaryHistory UpdateLastSalaryHistory { get; set; }
         public SalaryHistory NewSalaryHistory { get; set; }
+        public SalaryHistory LastSalaryHistory { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -31,7 +32,6 @@ namespace SuperEmployeeManager9000.Pages
             }
 
             Employee = await _context.Employee.FirstOrDefaultAsync(e => e.ID == id);
-            LastSalaryHistory = await _context.SalaryHistory.OrderByDescending(s => s.ID).FirstOrDefaultAsync(s => s.EmployeeID == id);
 
             if (Employee == null)
             {
@@ -47,11 +47,11 @@ namespace SuperEmployeeManager9000.Pages
                 return Page();
             }
 
-            if(LastSalaryHistory != null)
-            {
-                LastSalaryHistory.SalaryPeriodEnded = Employee.DateHired;
-                _context.Attach(LastSalaryHistory).State = EntityState.Modified;
-            }
+            //if (LastSalaryHistory != null)
+            //{ 
+
+            
+            //}
 
             NewSalaryHistory = new SalaryHistory
             {
@@ -60,6 +60,10 @@ namespace SuperEmployeeManager9000.Pages
                 SalaryForThePeriod = Employee.Salary,
                 SalaryPeriodEnded = DateTime.Now
             };
+
+            LastSalaryHistory = await _context.SalaryHistory.OrderByDescending(s => s.ID).FirstOrDefaultAsync(s => s.EmployeeID == Employee.ID);
+            LastSalaryHistory.SalaryPeriodEnded = Employee.DateHired;
+            _context.SalaryHistory.Update(LastSalaryHistory);
 
             _context.Attach(Employee).State = EntityState.Modified;
             _context.SalaryHistory.Add(NewSalaryHistory);
